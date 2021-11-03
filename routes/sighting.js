@@ -22,6 +22,31 @@ const getSightingByIndex = (req, res) => {
   });
 };
 
+const createNewSighting = (req, res) => {
+  add(FILENAME, 'sightings', req.body, (err) => {
+    if (err) {
+      res.status(500).send('DB write error.');
+      return;
+    }
+
+    read(FILENAME, (error, data) => {
+      if (error) {
+        console.error('Read error', error);
+        res.status(500).send(error);
+      }
+      const index = data.sightings.length - 1;
+      res.redirect(`/sighting/${index}`);
+    });
+  });
+};
+
 router.get('/:index', getSightingByIndex);
+
+router
+  .route('/')
+  .get((req, res) => {
+    res.render('new-sighting-form');
+  })
+  .post(createNewSighting);
 
 export default router;
