@@ -1,0 +1,13 @@
+<html>
+  <head>
+    <!-- AFTER HTML loads in browser, browser will request for CSS. -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+  </head>
+  <body>
+    <% Object.keys(sighting).forEach(key => { %>
+    <p><strong><%= key %>:</strong> <%= sighting[key] %></p>
+    <% }) %>
+    <hr />
+    <p><a href="/">Main Page</a></p>
+  </body>
+</html>

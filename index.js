@@ -1,5 +1,6 @@
 import express from 'express';
 import { read } from './jsonFileStorage.js';
+import sightingRouter from './routes/sighting.js';
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -19,5 +20,6 @@ const getAllSightings = (req, res) => {
 };
 
 app.get('/', getAllSightings);
+app.use('/sighting', sightingRouter);
 
 app.listen(3004);
