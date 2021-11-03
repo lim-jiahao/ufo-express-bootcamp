@@ -1,0 +1,58 @@
+<html>
+  <body>
+    <form action="/sighting/<%= locals.index %>/edit?_method=PUT" method="POST">
+      <label for="text">Text:</label><br />
+      <input
+        type="text"
+        name="text"
+        value="<%= locals.text %>"
+        required
+      /><br />
+      <label for="date_time">Date / Time:</label><br />
+      <input
+        type="text"
+        name="date_time"
+        value="<%= locals.date_time %>"
+        required
+      /><br />
+      <label for="city">City:</label><br />
+      <input
+        type="text"
+        name="city"
+        value="<%= locals.city %>"
+        required
+      /><br />
+      <label for="state">State:</label><br />
+      <input
+        type="text"
+        name="state"
+        value="<%= locals.state %>"
+        required
+      /><br />
+      <label for="shape">Shape:</label><br />
+      <input
+        type="text"
+        name="shape"
+        value="<%= locals.shape %>"
+        required
+      /><br />
+      <label for="duration">Duration:</label><br />
+      <input
+        type="text"
+        name="duration"
+        value="<%= locals.duration %>"
+        required
+      /><br />
+      <label for="summary">Summary:</label><br />
+      <input
+        type="text"
+        name="summary"
+        value="<%= locals.summary %>"
+        required
+      /><br />
+      <input type="submit" value="Submit" />
+    </form>
+    <hr />
+    <p><a href="/">Main Page</a></p>
+  </body>
+</html>

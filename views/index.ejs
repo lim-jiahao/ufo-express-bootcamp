@@ -6,6 +6,12 @@
   <body>
     <% sightings.forEach((sighting, index) => { %>
     <p><a href="/sighting/<%= index %>">Sighting <%= index %></a></p>
+    <form action="/sighting/<%= index %>/edit">
+      <input type="submit" value="Edit" />
+    </form>
+    <form action="/sighting/<%= index %>/delete?_method=DELETE" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
     <% }); %>
     <hr />
     <p><a href="/sighting">New Sighting</a></p>

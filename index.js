@@ -1,10 +1,12 @@
 import express from 'express';
+import methodOverride from 'method-override';
 import { read } from './jsonFileStorage.js';
 import sightingRouter from './routes/sighting.js';
 
 const app = express();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOverride('_method'));
 const FILENAME = 'data.json';
 
 const getAllSightings = (req, res) => {

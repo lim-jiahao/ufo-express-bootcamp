@@ -1,5 +1,5 @@
 import express from 'express';
-import { read, add } from '../jsonFileStorage.js';
+import { read, write, add } from '../jsonFileStorage.js';
 
 const router = express.Router();
 const FILENAME = 'data.json';
@@ -12,19 +12,21 @@ const getSightingByIndex = (req, res) => {
       return;
     }
 
-    const sighting = data.sightings[req.params.index];
+    const { index } = req.params;
+    const sighting = data.sightings[index];
     if (!sighting) {
       res.status(404).send('Sorry, no such index found!');
       return;
     }
 
-    res.status(200).render('sighting', { sighting });
+    res.status(200).render('sighting', { sighting, index });
   });
 };
 
 const createNewSighting = (req, res) => {
   add(FILENAME, 'sightings', req.body, (err) => {
     if (err) {
+      console.error('Read error', err);
       res.status(500).send('DB write error.');
       return;
     }
@@ -40,13 +42,77 @@ const createNewSighting = (req, res) => {
   });
 };
 
+const getEditForm = (req, res) => {
+  read('data.json', (err, data) => {
+    if (err) {
+      console.error('Read error', err);
+      res.status(500).send(err);
+      return;
+    }
+    const { index } = req.params;
+    const sighting = data.sightings[index];
+    if (!sighting) {
+      res.status(404).send('Sorry, no such index found!');
+      return;
+    }
+    const editData = { ...sighting, index };
+    res.render('edit-sighting-form', editData);
+  });
+};
+
+const editSighting = (req, res) => {
+  const { index } = req.params;
+  read('data.json', (err, data) => {
+    if (err) {
+      console.error('Read error', err);
+      res.status(500).send(err);
+      return;
+    }
+
+    data.sightings[index] = req.body;
+    write('data.json', data, (error) => {
+      if (error) {
+        console.error('Edit error', error);
+        res.status(500).send(error);
+        return;
+      }
+      res.redirect(`/sighting/${index}`);
+    });
+  });
+};
+
+const deleteSighting = (req, res) => {
+  const { index } = req.params;
+  read('data.json', (err, data) => {
+    if (err) {
+      console.error('Read error', err);
+      res.status(500).send(err);
+      return;
+    }
+    data.sightings.splice(index, 1);
+    write('data.json', data, (error) => {
+      if (error) {
+        console.error('Edit error', error);
+        res.status(500).send(error);
+        return;
+      }
+      res.redirect('/');
+    });
+  });
+};
+
 router.get('/:index', getSightingByIndex);
 
 router
   .route('/')
-  .get((req, res) => {
-    res.render('new-sighting-form');
-  })
+  .get((req, res) => { res.render('new-sighting-form'); })
   .post(createNewSighting);
+
+router
+  .route('/:index/edit')
+  .get(getEditForm)
+  .put(editSighting);
+
+router.delete('/:index/delete', deleteSighting);
 
 export default router;

@@ -7,6 +7,12 @@
     <% Object.keys(sighting).forEach(key => { %>
     <p><strong><%= key %>:</strong> <%= sighting[key] %></p>
     <% }) %>
+    <form action="/sighting/<%= index %>/edit">
+      <input type="submit" value="Edit" />
+    </form>
+    <form action="/sighting/<%= index %>/delete?_method=DELETE" method="POST">
+      <input type="submit" value="Delete" />
+    </form>
     <hr />
     <p><a href="/">Main Page</a></p>
   </body>
