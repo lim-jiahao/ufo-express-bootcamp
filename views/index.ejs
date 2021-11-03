@@ -1,0 +1,11 @@
+<html>
+  <head>
+    <!-- AFTER HTML loads in browser, browser will request for CSS. -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+  </head>
+  <body>
+    <% sightings.forEach((sighting, index) => { %>
+    <p><a href="/sighting/<%= index %>">Sighting <%= index %></a></p>
+    <% }); %>
+  </body>
+</html>
