@@ -73,6 +73,7 @@ const editSighting = (req, res) => {
       return;
     }
 
+    req.body.created = data.sightings[index].created;
     data.sightings[index] = req.body;
     write('data.json', data, (error) => {
       if (error) {
