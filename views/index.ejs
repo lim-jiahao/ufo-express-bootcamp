@@ -40,14 +40,28 @@
             <li class="nav-item">
               <a class="nav-link" href="/sighting">New Sighting</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Shapes</a>
-            </li>
           </ul>
         </div>
       </div>
     </nav>
-    <div class="px-md-5" style="margin-top: 70px">
+    <div class="dropdown" style="margin-top: 70px">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton1"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        Select shape
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <a class="dropdown-item" href="/">All</a>
+        <% shapes.forEach((shape) => { %>
+        <a class="dropdown-item" href="?shape=<%= shape %>"><%= shape %></a>
+        <% }) %>
+      </div>
+    </div>
+    <div class="px-md-5">
       <table class="table table-dark table-striped table-hover">
         <thead>
           <tr>
@@ -60,16 +74,18 @@
           </tr>
         </thead>
         <tbody>
+          <% sightings.forEach((sighting) => { %>
           <tr>
-            <% sightings.forEach((sighting, index) => { %>
             <th scope="row">
-              <a href="/sighting/<%= index %>">Sighting <%= index %></a>
+              <a href="/sighting/<%= sighting.index %>"
+                >Sighting <%= sighting.index %></a
+              >
             </th>
             <td><%= new Date(sighting.date_time).toDateString() %></td>
             <td><%= sighting.city %></td>
             <td><%= sighting.shape %></td>
             <td>
-              <form action="/sighting/<%= index %>/edit" class="me-2">
+              <form action="/sighting/<%= sighting.index %>/edit" class="me-2">
                 <input
                   type="submit"
                   value="Edit"
@@ -77,9 +93,12 @@
                 />
               </form>
             </td>
-            <td data-bs-toggle="tooltip" title="Deleting is permanent. Please make sure you are deleting the right sighting.">
+            <td
+              data-bs-toggle="tooltip"
+              title="Deleting is permanent. Please make sure you are deleting the right sighting."
+            >
               <form
-                action="/sighting/<%= index %>/delete?_method=DELETE"
+                action="/sighting/<%= sighting.index %>/delete?_method=DELETE"
                 method="POST"
               >
                 <input
@@ -89,9 +108,8 @@
                 />
               </form>
             </td>
-            </tr>
-            <% }); %>
           </tr>
+          <% }); %>
         </tbody>
       </table>
     </div>

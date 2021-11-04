@@ -9,6 +9,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
 const FILENAME = 'data.json';
 
+const capitalise = (str) => `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
+
 const getAllSightings = (req, res) => {
   read(FILENAME, (err, data) => {
     if (err) {
@@ -17,7 +19,12 @@ const getAllSightings = (req, res) => {
       return;
     }
 
-    res.status(200).render('index', data);
+    let sightings = data.sightings.map((sighting, index) => ({ ...sighting, index }));
+    const shapes = [...new Set(sightings.map((sighting) => capitalise(sighting.shape)))];
+    shapes.sort((a, b) => a.localeCompare(b));
+    const { shape } = req.query;
+    if (shape) sightings = sightings.filter((sighting) => capitalise(sighting.shape) === shape);
+    res.status(200).render('index', { sightings, shapes });
   });
 };
 

@@ -28,6 +28,7 @@ const getSightingByIndex = (req, res) => {
 
 const createNewSighting = (req, res) => {
   req.body.created = new Date();
+  req.body.shape = req.body.shape.trim();
   add(FILENAME, 'sightings', req.body, (err) => {
     if (err) {
       console.error('Read error', err);
@@ -74,6 +75,7 @@ const editSighting = (req, res) => {
     }
 
     req.body.created = data.sightings[index].created;
+    req.body.shape = req.body.shape.trim();
     data.sightings[index] = req.body;
     write('data.json', data, (error) => {
       if (error) {
