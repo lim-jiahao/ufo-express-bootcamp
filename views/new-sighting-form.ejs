@@ -13,31 +13,85 @@
 
     <title>🛸 UFO Sightings 👽</title>
   </head>
-  <body class="container-fluid d-flex flex-column align-items-center">
-    <form action="/sighting" method="POST">
-      <label for="summary">Summary:</label><br />
-      <input type="text" name="summary" required /><br />
-      <label for="date_time">Date / Time: (please enter in UTC +8 hrs)</label
-      ><br />
-      <input
-        type="datetime-local"
-        name="date_time"
-        max="<%= moment().format('YYYY-MM-DDTHH:mm') %>"
-        required
-      /><br />
-      <label for="city">City:</label><br />
-      <input type="text" name="city" required /><br />
-      <label for="state">State:</label><br />
-      <input type="text" name="state" required /><br />
-      <label for="shape">Shape:</label><br />
-      <input type="text" name="shape" required /><br />
-      <label for="duration">Duration:</label><br />
-      <input type="text" name="duration" required /><br />
-      <label for="description">Description:</label><br />
-      <textarea name="description" rows="4" cols="50"></textarea><br />
-      <input type="submit" value="Submit" />
-    </form>
-    <hr />
-    <p><a href="/">Main Page</a></p>
+  <body
+    class="
+      container-fluid
+      d-flex
+      flex-column
+      align-items-center
+      bg-dark
+      text-light
+    "
+  >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"
+          >🛸 <strong>UFO SIGHTINGS</strong> 👽</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link active fw-bold"
+                aria-current="page"
+                href="/sighting"
+                >New Sighting</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Shapes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="card bg-secondary" style="margin-top: 70px">
+      <h6 class="card-header">New Sighting</h6>
+      <div class="card-body">
+        <form action="/sighting" method="POST">
+          <label for="summary">Summary:</label><br />
+          <input type="text" name="summary" required /><br />
+          <label for="date_time"
+            >Date / Time: (please enter in UTC +8 hrs)</label
+          ><br />
+          <input
+            type="datetime-local"
+            name="date_time"
+            max="<%= moment().format('YYYY-MM-DDTHH:mm') %>"
+            required
+          /><br />
+          <label for="city">City:</label><br />
+          <input type="text" name="city" required /><br />
+          <label for="state">State:</label><br />
+          <input type="text" name="state" required /><br />
+          <label for="shape">Shape:</label><br />
+          <input type="text" name="shape" required /><br />
+          <label for="duration">Duration:</label><br />
+          <input type="text" name="duration" required /><br />
+          <label for="description">Description:</label><br />
+          <textarea name="description" rows="4" cols="75"></textarea><br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

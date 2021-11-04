@@ -13,18 +13,73 @@
 
     <title>🛸 UFO Sightings 👽</title>
   </head>
-  <body class="container d-flex flex-column align-items-center">
-    <header><h1>🛸 Sighting <%= index %> 👽</h1></header>
-    <% Object.keys(sighting).forEach(key => { %>
-    <p><strong><%= key %>:</strong> <%= sighting[key] %></p>
-    <% }) %>
-    <form action="/sighting/<%= index %>/edit">
-      <input type="submit" value="Edit" />
-    </form>
-    <form action="/sighting/<%= index %>/delete?_method=DELETE" method="POST">
-      <input type="submit" value="Delete" />
-    </form>
-    <hr />
-    <p><a href="/">Main Page</a></p>
+  <body
+    class="container d-flex flex-column align-items-center bg-dark text-light"
+  >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/"
+          >🛸 <strong>UFO SIGHTINGS</strong> 👽</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sighting">New Sighting</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Shapes</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="card w-75 mb-4 bg-secondary" style="margin-top: 70px">
+      <h5 class="card-header">Information</h5>
+      <div class="card-body">
+        <p class="card-text">
+          <strong>Date / Time:</strong> <%= sighting.date_time %>
+        </p>
+        <p class="card-text">
+          <strong>Summary:</strong> <%= sighting.summary %>
+        </p>
+        <p class="card-text"><strong>City:</strong> <%= sighting.city %></p>
+        <p class="card-text"><strong>State:</strong> <%= sighting.state %></p>
+        <p class="card-text"><strong>Shape:</strong> <%= sighting.shape %></p>
+        <p class="card-text">
+          <strong>Duration:</strong> <%= sighting.duration %>
+        </p>
+        <p class="card-text">
+          <strong>Created:</strong> <%= sighting.created %>
+        </p>
+      </div>
+    </div>
+    <div class="card w-75 mb-4 bg-secondary">
+      <h5 class="card-header">Description</h5>
+      <div class="card-body">
+        <p class="card-text"><%= sighting.description %></p>
+      </div>
+    </div>
+    <div class="d-flex">
+      <form action="/sighting/<%= index %>/edit" class="me-2">
+        <input type="submit" value="Edit" class="btn btn-warning" />
+      </form>
+      <form action="/sighting/<%= index %>/delete?_method=DELETE" method="POST">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+      </form>
+    </div>
   </body>
 </html>
