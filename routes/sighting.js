@@ -1,4 +1,5 @@
 import express from 'express';
+import moment from 'moment';
 import { read, write, add } from '../jsonFileStorage.js';
 
 const router = express.Router();
@@ -19,11 +20,14 @@ const getSightingByIndex = (req, res) => {
       return;
     }
 
+    sighting.date_time = moment(sighting.date_time).format('dddd, MMMM Do, YYYY, hh:mma');
+    if (sighting.created) sighting.created = moment(sighting.created).fromNow();
     res.status(200).render('sighting', { sighting, index });
   });
 };
 
 const createNewSighting = (req, res) => {
+  req.body.created = new Date();
   add(FILENAME, 'sightings', req.body, (err) => {
     if (err) {
       console.error('Read error', err);
@@ -105,7 +109,7 @@ router.get('/:index', getSightingByIndex);
 
 router
   .route('/')
-  .get((req, res) => { res.render('new-sighting-form'); })
+  .get((req, res) => { res.render('new-sighting-form', { moment }); })
   .post(createNewSighting);
 
 router

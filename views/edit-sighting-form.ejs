@@ -22,11 +22,13 @@
         value="<%= locals.summary %>"
         required
       /><br />
-      <label for="date_time">Date / Time:</label><br />
+      <label for="date_time">Date / Time: (please enter in UTC +8 hrs)</label
+      ><br />
       <input
         type="datetime-local"
         name="date_time"
         value="<%= locals.date_time %>"
+        max="<%= locals.date_time %>"
         required
       /><br />
       <label for="city">City:</label><br />
