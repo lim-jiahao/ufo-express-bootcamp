@@ -52,7 +52,7 @@
         <thead>
           <tr>
             <th scope="col">Sighting</th>
-            <th scope="col">Date / Time</th>
+            <th scope="col">Date</th>
             <th scope="col">City</th>
             <th scope="col">Shape</th>
             <th scope="col"></th>
@@ -77,7 +77,7 @@
                 />
               </form>
             </td>
-            <td>
+            <td data-bs-toggle="tooltip" title="Deleting is permanent. Please make sure you are deleting the right sighting.">
               <form
                 action="/sighting/<%= index %>/delete?_method=DELETE"
                 method="POST"

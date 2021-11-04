@@ -78,7 +78,13 @@
         <input type="submit" value="Edit" class="btn btn-warning" />
       </form>
       <form action="/sighting/<%= index %>/delete?_method=DELETE" method="POST">
-        <input type="submit" value="Delete" class="btn btn-danger" />
+        <input
+          type="submit"
+          value="Delete"
+          class="btn btn-danger"
+          data-bs-toggle="tooltip"
+          title="Deleting is permanent. Please make sure you are deleting the right sighting."
+        />
       </form>
     </div>
   </body>
