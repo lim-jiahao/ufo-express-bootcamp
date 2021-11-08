@@ -14,25 +14,9 @@
     <title>🛸 UFO Sightings 👽</title>
   </head>
   <body class="text-center bg-dark text-light">
-    <%- include('nav', { page: '/' }) %>
-    <div class="dropdown" style="margin-top: 70px">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton1"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        Select shape
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <a class="dropdown-item" href="/">All</a>
-        <% shapes.forEach((shape) => { %>
-        <a class="dropdown-item" href="?shape=<%= shape %>"><%= shape %></a>
-        <% }) %>
-      </div>
-    </div>
-    <div class="px-md-5"><%- include('table') %></div>
+    <%- include('nav', { page: '/favourites' }) %>
+
+    <div class="px-md-5" style="margin-top: 70px"><%- include('table') %></div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

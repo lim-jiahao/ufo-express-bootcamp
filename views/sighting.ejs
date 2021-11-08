@@ -43,7 +43,12 @@
         <p class="card-text"><%= sighting.description %></p>
       </div>
     </div>
-    <div class="d-flex">
+    <div class="d-flex align-items-start">
+      <a
+        href="/favourites/add?index=<%= index %>"
+        class="btn btn-success text-light me-2"
+        ><%= isFav ? 'Unfavourite' : 'Favourite' %></a
+      >
       <form action="/sighting/<%= index %>/edit" class="me-2">
         <input type="submit" value="Edit" class="btn btn-warning text-light" />
       </form>

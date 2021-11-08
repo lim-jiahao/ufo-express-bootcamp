@@ -20,9 +20,10 @@ const getSightingByIndex = (req, res) => {
       return;
     }
 
+    const isFav = req.cookies.favourites?.includes(Number(index));
     sighting.date_time = moment(sighting.date_time).format('dddd, MMMM Do, YYYY, hh:mma');
     if (sighting.created) sighting.created = moment(sighting.created).fromNow();
-    res.status(200).render('sighting', { sighting, index });
+    res.status(200).render('sighting', { sighting, index, isFav });
   });
 };
 
@@ -96,7 +97,15 @@ const deleteSighting = (req, res) => {
       res.status(500).send(err);
       return;
     }
+
     data.sightings.splice(index, 1);
+    let favIndexes = req.cookies.favourites;
+    if (favIndexes) {
+      favIndexes = favIndexes.filter((el) => el !== Number(index))
+        .map((el) => (el > index ? el - 1 : el));
+    }
+    res.cookie('favourites', favIndexes);
+
     write('data.json', data, (error) => {
       if (error) {
         console.error('Edit error', error);

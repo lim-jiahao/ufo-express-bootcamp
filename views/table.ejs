@@ -1,0 +1,53 @@
+<table class="table table-dark table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Sighting</th>
+      <th scope="col">Date</th>
+      <th scope="col">City</th>
+      <th scope="col">Shape</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% sightings.forEach((sighting) => { %>
+    <tr>
+      <th scope="row">
+        <a href="/sighting/<%= sighting.index %>"
+          >Sighting <%= sighting.index %></a
+        >
+        <% if (favIndexes.includes(sighting.index)) { %>
+        <span>⭐</span>
+        <% } %>
+      </th>
+      <td><%= new Date(sighting.date_time).toDateString() %></td>
+      <td><%= sighting.city %></td>
+      <td><%= sighting.shape %></td>
+      <td>
+        <form action="/sighting/<%= sighting.index %>/edit" class="me-2">
+          <input
+            type="submit"
+            value="Edit"
+            class="btn btn-warning btn-sm text-light"
+          />
+        </form>
+      </td>
+      <td
+        data-bs-toggle="tooltip"
+        title="Deleting is permanent. Please make sure you are deleting the right sighting."
+      >
+        <form
+          action="/sighting/<%= sighting.index %>/delete?_method=DELETE"
+          method="POST"
+        >
+          <input
+            type="submit"
+            value="Delete"
+            class="btn btn-danger btn-sm text-light"
+          />
+        </form>
+      </td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
