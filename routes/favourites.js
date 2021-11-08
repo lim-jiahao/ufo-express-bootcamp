@@ -31,7 +31,6 @@ const addToFavourites = (req, res) => {
 
   if (!favIndexes.includes(Number(index))) favIndexes.push(Number(index));
   else favIndexes = favIndexes.filter((el) => el !== Number(index));
-  console.log(favIndexes);
 
   res.cookie('favourites', favIndexes);
   res.redirect('/');

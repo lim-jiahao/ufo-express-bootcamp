@@ -23,7 +23,7 @@
       text-light
     "
   >
-    <%- include('nav', { page: '/sighting' }) %>
+    <%- include('common/nav', { page: '/sighting' }) %>
     <div class="card bg-secondary mb-3" style="margin-top: 70px">
       <h6 class="card-header">New Sighting</h6>
       <div class="card-body">
@@ -33,7 +33,7 @@
           method="POST"
           novalidate
         >
-          <%- include('form') %>
+          <%- include('common/form') %>
         </form>
       </div>
     </div>

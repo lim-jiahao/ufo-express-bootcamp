@@ -99,11 +99,10 @@ const deleteSighting = (req, res) => {
     }
 
     data.sightings.splice(index, 1);
-    let favIndexes = req.cookies.favourites;
-    if (favIndexes) {
-      favIndexes = favIndexes.filter((el) => el !== Number(index))
-        .map((el) => (el > index ? el - 1 : el));
-    }
+    let favIndexes = req.cookies.favourites ?? [];
+
+    favIndexes = favIndexes.filter((el) => el !== Number(index))
+      .map((el) => (el > index ? el - 1 : el));
     res.cookie('favourites', favIndexes);
 
     write('data.json', data, (error) => {
