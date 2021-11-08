@@ -1,0 +1,105 @@
+<div class="mb-1">
+  <label for="summary" class="form-label">Summary:</label><br />
+  <input
+    type="text"
+    class="form-control"
+    name="summary"
+    value="<%= locals.summary %>"
+    required
+  />
+  <div class="invalid-feedback fw-bold" style="color: #af0000">
+    Please input a summary of the sighting.
+  </div>
+</div>
+<div class="mb-1">
+  <label for="date_time" class="form-label"
+    >Date / Time: (please enter in UTC +8 hrs)</label
+  ><br />
+  <% if (locals.date_time) { %>
+  <input
+    type="datetime-local"
+    name="date_time"
+    value="<%= locals.date_time %>"
+    max="<%= locals.date_time %>"
+    class="form-control"
+    required
+  />
+  <% } else { %>
+  <input
+    type="datetime-local"
+    name="date_time"
+    max="<%= moment().format('YYYY-MM-DDTHH:mm') %>"
+    class="form-control"
+    required
+  />
+  <% } %>
+  <div class="invalid-feedback fw-bold" style="color: #af0000">
+    Please input when the sighting happened.
+  </div>
+</div>
+<div class="row mb-1">
+  <div class="col-6">
+    <label for="city" class="form-label">City:</label><br />
+    <input
+      type="text"
+      class="form-control"
+      name="city"
+      value="<%= locals.city %>"
+      required
+    />
+    <div class="invalid-feedback fw-bold" style="color: #af0000">
+      Please input the city at which the sighting occurred.
+    </div>
+  </div>
+  <div class="col-6">
+    <label for="state" class="form-label">State:</label><br />
+    <input
+      type="text"
+      class="form-control"
+      name="state"
+      value="<%= locals.state %>"
+      required
+    />
+    <div class="invalid-feedback fw-bold" style="color: #af0000">
+      Please input the state at which the sighting occurred.
+    </div>
+  </div>
+</div>
+<div class="row mb-1">
+  <div class="col-6">
+    <label for="shape" class="form-label">Shape:</label><br />
+    <input
+      type="text"
+      class="form-control"
+      name="shape"
+      value="<%= locals.shape %>"
+      required
+    />
+    <div class="invalid-feedback fw-bold" style="color: #af0000">
+      Plase input the shape of the UFO.
+    </div>
+  </div>
+  <div class="col-6">
+    <label for="duration" class="form-label">Duration:</label><br />
+    <input
+      type="text"
+      class="form-control"
+      name="duration"
+      value="<%= locals.duration %>"
+      required
+    />
+    <div class="invalid-feedback fw-bold" style="color: #af0000">
+      Please input how long the sighting lasted for.
+    </div>
+  </div>
+</div>
+<div class="mb-1">
+  <label for="description" class="form-label">Description:</label><br />
+  <textarea name="description" class="form-control" rows="4" cols="75" required>
+<%= locals.description %></textarea
+  >
+  <div class="invalid-feedback fw-bold" style="color: #af0000">
+    Please input a detailed description of the sighting.
+  </div>
+</div>
+<input type="submit" value="Submit" />
