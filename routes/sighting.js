@@ -49,7 +49,7 @@ const createNewSighting = (req, res) => {
 };
 
 const getEditForm = (req, res) => {
-  read('data.json', (err, data) => {
+  read(FILENAME, (err, data) => {
     if (err) {
       console.error('Read error', err);
       res.status(500).send(err);
@@ -68,7 +68,7 @@ const getEditForm = (req, res) => {
 
 const editSighting = (req, res) => {
   const { index } = req.params;
-  read('data.json', (err, data) => {
+  read(FILENAME, (err, data) => {
     if (err) {
       console.error('Read error', err);
       res.status(500).send(err);
@@ -78,7 +78,7 @@ const editSighting = (req, res) => {
     req.body.created = data.sightings[index].created;
     req.body.shape = req.body.shape.trim();
     data.sightings[index] = req.body;
-    write('data.json', data, (error) => {
+    write(FILENAME, data, (error) => {
       if (error) {
         console.error('Edit error', error);
         res.status(500).send(error);
@@ -91,7 +91,7 @@ const editSighting = (req, res) => {
 
 const deleteSighting = (req, res) => {
   const { index } = req.params;
-  read('data.json', (err, data) => {
+  read(FILENAME, (err, data) => {
     if (err) {
       console.error('Read error', err);
       res.status(500).send(err);
@@ -105,7 +105,7 @@ const deleteSighting = (req, res) => {
       .map((el) => (el > index ? el - 1 : el));
     res.cookie('favourites', favIndexes);
 
-    write('data.json', data, (error) => {
+    write(FILENAME, data, (error) => {
       if (error) {
         console.error('Edit error', error);
         res.status(500).send(error);
